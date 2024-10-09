@@ -3,7 +3,7 @@ import "./ProductList.css";
 import CartItem from "./CartItem";
 import { addItem } from "./CartSlice";
 import { useDispatch } from "react-redux";
-import { useTotalQty } from "./hooks/useTotalQty";
+import { useSelector } from "react-redux";
 
 const styleObj = {
   backgroundColor: "#4CAF50",
@@ -274,7 +274,7 @@ function ProductList() {
   const [addedToCart, setAddedToCart] = useState({});
 
   const dispatch = useDispatch();
-  const totalQty = useTotalQty();
+  const totalQty = useSelector((state) => state.cart.totalQty);
 
   const handleCartClick = (e) => {
     e.preventDefault();

@@ -2,12 +2,11 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, updateQuantity } from "./CartSlice";
 import "./CartItem.css";
-import { useTotalQty } from "./hooks/useTotalQty";
 
 const CartItem = ({ onContinueShopping, onRemove }) => {
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  const totalQty = useTotalQty();
+  const totalQty = useSelector((state) => state.cart.totalQty);
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
@@ -36,7 +35,7 @@ const CartItem = ({ onContinueShopping, onRemove }) => {
   };
 
   const handleRemove = (item) => {
-    dispatch(removeItem(item.name));
+    dispatch(removeItem({ name: item.name, qty: item.qty }));
     onRemove(item.name);
   };
 
